@@ -12,7 +12,8 @@ export const RecipeState = Immutable.fromJS({
     id: '',
     name: '', 
     description: '', 
-    imagePath: '',     
+    imagePath: '',
+    location: '',     
   } 
 });
 

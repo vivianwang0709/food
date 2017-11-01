@@ -133,7 +133,8 @@ apiRoutes.put('/recipes/:id', (req, res) => {
     description: req.body.description, 
     imagePath: req.body.imagePath,
     steps: ['放入番茄', '打個蛋', '放入少許鹽巴', '用心快炒'],
-    updatedAt: new Date()
+    updatedAt: new Date(),
+    location: req.body.location,
   } ,(err) => {
     if (err) throw err;
     console.log('User updated successfully');
@@ -149,8 +150,5 @@ apiRoutes.delete('/recipes/:id', (req, res) => {
   });
 }); 
 
-apiRoutes.get('/post/:id', (req,res) => {
-
-});
 
 export default apiRoutes;

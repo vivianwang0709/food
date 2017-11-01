@@ -30,7 +30,7 @@ export default connect(
       const recipeIndex = recipes.findIndex((_recipe) => (_recipe.get('_id') === recipeId));
       const recipe = recipeIndex !== -1 ? recipes.get(recipeIndex) : undefined;
       dispatch(setRecipe({ keyPath: ['recipe'], value: recipe }));
-      dispatch(setRecipe({ keyPath: ['recipe', 'id'], value: recipeId }));
+      dispatch(setRecipe({ keyPath: ['recipe', 'id'], value: recipeId }));      
     },
   }),
   (stateProps, dispatchProps, ownProps) => {

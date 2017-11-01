@@ -60,7 +60,8 @@ const handleRender = (req, res) => {
             id: '',
             name: '', 
             description: '', 
-            imagePath: '',            
+            imagePath: '', 
+            location: '',           
           }  
         },
         user: {

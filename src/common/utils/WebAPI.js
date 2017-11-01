@@ -79,13 +79,14 @@ export default {
     .catch((error) => {
     });
   },
-  addRecipe: (dispatch, name, description, imagePath) => {
+  addRecipe: (dispatch, name, description, imagePath, location) => {
     const id = uuid.v4();
     axios.post('/api/recipes?token=' + getCookie('token'), {
       id: id,
       name: name,
       description: description,
       imagePath: imagePath,
+      location: location,
     })
     .then((response) => {
       if(response.data.success === false) {
@@ -101,12 +102,13 @@ export default {
     .catch(function (error) {
     });
   },
-  updateRecipe: (dispatch, recipeId, name, description, imagePath) => {
+  updateRecipe: (dispatch, recipeId, name, description, imagePath, location) => {
     axios.put('/api/recipes/' + recipeId + '?token=' + getCookie('token'), {
       id: recipeId,
       name: name,
       description: description,
       imagePath: imagePath,
+      location: location,
     })
     .then((response) => {
       if(response.data.success === false) {

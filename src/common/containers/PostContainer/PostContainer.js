@@ -8,6 +8,7 @@ export default connect(
       name: state.getIn(['recipe', 'recipe', 'name']),
       description: state.getIn(['recipe', 'recipe', 'description']),
       imagePath: state.getIn(['recipe', 'recipe', 'imagePath']),
+      location: state.getIn(['recipe', 'recipe', 'location']),
     }),
     (dispatch) => ({
     })

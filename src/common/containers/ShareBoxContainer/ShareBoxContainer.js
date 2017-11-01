@@ -16,6 +16,7 @@ export default connect(
     name: state.getIn(['recipe', 'recipe', 'name']),
     description: state.getIn(['recipe', 'recipe', 'description']),
     imagePath: state.getIn(['recipe', 'recipe', 'imagePath']),
+    location: state.getIn(['recipe', 'recipe', 'location']),    
     isEdit: state.getIn(['ui', 'isEdit']),
   }),
   (dispatch) => ({
@@ -27,22 +28,25 @@ export default connect(
     ),
     onChangeImageUrl: (event) => (
       dispatch(setRecipe({ keyPath: ['recipe', 'imagePath'], value: event.target.value }))
-    ),    
-    onRecipeSubmit: (recipes, recipeId, name, description, imagePath, isEdit) => () => {
+    ),
+    onChangeLocation: (event) => (
+      dispatch(setRecipe({ keyPath: ['recipe', 'location'], value: event.target.value }))
+    ),        
+    onRecipeSubmit: (recipes, recipeId, name, description, imagePath, location, isEdit) => () => {
       if (isEdit === true) {
-        dispatch(updateRecipe(dispatch, recipeId, name, description, imagePath));
+        dispatch(updateRecipe(dispatch, recipeId, name, description, imagePath, location));
         dispatch(showSpinner());
       } else {
-        dispatch(addRecipe(dispatch, name, description, imagePath));
+        dispatch(addRecipe(dispatch, name, description, imagePath, location));
         dispatch(showSpinner());
       }
     },    
   }),
   (stateProps, dispatchProps, ownProps) => {
-    const { recipes, recipeId, name, description, imagePath, isEdit } = stateProps;
+    const { recipes, recipeId, name, description, imagePath, location, isEdit } = stateProps;
     const { onRecipeSubmit } = dispatchProps;
     return Object.assign({}, stateProps, dispatchProps, ownProps, {
-      onRecipeSubmit: onRecipeSubmit(recipes, recipeId, name, description, imagePath, isEdit),
+      onRecipeSubmit: onRecipeSubmit(recipes, recipeId, name, description, imagePath, location, isEdit),
     });
   }  
 )(ShareBox);

@@ -41,6 +41,18 @@ const ShareBox = (props) => {
         />
         <FormControl.Feedback />
       </FormGroup>
+      <FormGroup
+        controlId="formBasicText"
+      >
+        <ControlLabel>請輸入地址</ControlLabel>
+        <FormControl
+          type="text"
+          placeholder="Enter text"
+          defaultValue={props.location}
+          onChange={props.onChangeLocation}
+        />
+        <FormControl.Feedback />
+      </FormGroup>
       <Button 
         onClick={props.onRecipeSubmit} 
         bsStyle="success" 

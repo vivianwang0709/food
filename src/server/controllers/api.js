@@ -149,4 +149,8 @@ apiRoutes.delete('/recipes/:id', (req, res) => {
   });
 }); 
 
+apiRoutes.get('/post/:id', (req,res) => {
+
+});
+
 export default apiRoutes;

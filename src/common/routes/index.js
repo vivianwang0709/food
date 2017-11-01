@@ -5,11 +5,13 @@ import CheckAuth from '../components/CheckAuth';
 import HomePageContainer from '../containers/HomePageContainer';
 import LoginPageContainer from '../containers/LoginPageContainer';
 import SharePageContainer from '../containers/SharePageContainer';
+import PostContainer from '../containers/PostContainer';
 
 export default (
   <Route path='/' component={Main}>
     <IndexRoute component={HomePageContainer} />
     <Route path="/login" component={CheckAuth(LoginPageContainer, 'guest')}/>
     <Route path="/share" component={CheckAuth(SharePageContainer, 'auth')}/>
+    <Route path="/post/:name" component={PostContainer}/>  
   </Route>
 );

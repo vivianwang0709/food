@@ -3,6 +3,7 @@ import { Form, FormGroup, Button, FormControl, ControlLabel } from 'react-bootst
 
 const ShareBox = (props) => {
   return (<div>
+    <h3>{props.recipeId}</h3>
     <Form horizontal>
       <FormGroup
         controlId="formBasicText"

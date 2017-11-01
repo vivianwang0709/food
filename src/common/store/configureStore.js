@@ -12,6 +12,6 @@ export default function configureStore(preloadedState = initialState) {
     preloadedState,
     applyMiddleware(createLogger({ stateTransformer: state => state.toJS() }, promiseMiddleware))
   );
-
+  
   return store;
 }

@@ -26,12 +26,19 @@ export default connect(
       dispatch(setUi({ key: 'isEdit', value: true }));
       browserHistory.push('/share?recipeId=' + recipeId); 
     },
+    onPost: (recipes) => (recipeId) => () => {
+      const recipeIndex = recipes.findIndex((_recipe) => (_recipe.get('_id') === recipeId));
+      const recipe = recipeIndex !== -1 ? recipes.get(recipeIndex) : undefined;
+      dispatch(setRecipe({ keyPath: ['recipe'], value: recipe }));
+      dispatch(setRecipe({ keyPath: ['recipe', 'id'], value: recipeId }));
+    },
   }),
   (stateProps, dispatchProps, ownProps) => {
     const { recipes } = stateProps; 
-    const { onUpadateRecipe } = dispatchProps; 
+    const { onUpadateRecipe,onPost } = dispatchProps; 
     return Object.assign({}, stateProps, dispatchProps, ownProps, {
       onUpadateRecipe: onUpadateRecipe(recipes),
+      onPost: onPost(recipes),
     });
   }
 )(RecipeBox);

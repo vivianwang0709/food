@@ -8,6 +8,7 @@ import configureStore from '../common/store/configureStore';
 import { checkAuth } from '../common/actions';
 
 import '../common/style/post.less';
+import '../common/style/home.less';
 
 // get initial state from server side
 const initialState = window.__PRELOADED_STATE__;

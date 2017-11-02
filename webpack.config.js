@@ -1,4 +1,19 @@
-import webpack from 'webpack';
+var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin'); //css单独打包
+
+var plugins = [];
+
+
+require.extensions['.css'] = () => {
+  return;
+};
+
+
+plugins.push(new webpack.optimize.OccurrenceOrderPlugin());
+plugins.push(new webpack.HotModuleReplacementPlugin());
+plugins.push(new ExtractTextPlugin('[name].css')); //css单独打包
+
+
 
 module.exports = {
   entry: [
@@ -7,7 +22,7 @@ module.exports = {
   output: {
     path: `${__dirname}/dist`,
     filename: 'bundle.js',
-    publicPath: '/static/'
+    publicPath: '/static/',
   },
   module: {
     preLoaders: [
@@ -18,14 +33,19 @@ module.exports = {
         exclude: /bundle\.js$/,
       },
     ],
-    plugins: [
-      new webpack.optimize.OccurrenceOrderPlugin(),
-      new webpack.HotModuleReplacementPlugin()
-    ],    
     loaders: [{
       test: /\.js$/,
-      exclude: /node_modules/,
+      exclude: /^node_modules$/,
       loader: 'babel-loader',
+    }, {
+      test: /\.css$/,
+      exclude: /^node_modules$/,
+      loader: ExtractTextPlugin.extract('style-loader', 'css-loader!autoprefixer-loader')
+    }, {
+      test: /\.less/,
+      exclude: /^node_modules$/,
+      loader: ExtractTextPlugin.extract('style-loader', 'css-loader!autoprefixer-loader!less-loader')      
     }],
   },
+  plugins,  
 };

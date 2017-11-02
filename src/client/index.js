@@ -7,6 +7,8 @@ import routes from '../common/routes';
 import configureStore from '../common/store/configureStore';
 import { checkAuth } from '../common/actions';
 
+import '../common/style/post.less';
+
 // get initial state from server side
 const initialState = window.__PRELOADED_STATE__;
 

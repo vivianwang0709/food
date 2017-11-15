@@ -7,6 +7,8 @@ import mongoose from 'mongoose';
 import config from './config';
 import User from './models/user';
 import Recipe from './models/recipe';
+
+
 /* Client Packages */
 import webpack from 'webpack';
 import React from 'react';
@@ -16,22 +18,30 @@ import { RouterContext, match } from 'react-router';
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import Immutable, { fromJS } from 'immutable';
+
+
 /* Common Packages */
 import webpackConfig from '../../webpack.config';
 import routes from '../common/routes';
 import configureStore from '../common/store/configureStore';
 import fetchComponentData from '../common/utils/fetchComponentData';
 import apiRoutes from './controllers/api.js';
+
+
 /* config */
 const app = new Express();
 const port = process.env.PORT || 3000;
 mongoose.connect(config.database); // connect to database
 app.set('env', 'production');
+
+// src/server/public
 app.use('/static', Express.static(__dirname + '/public'));
 app.use(cookieParser());
+
 // use body parser so we can get info from POST and/or URL parameters
 app.use(bodyParser.urlencoded({ extended: false })); // only can deal with key/value
 app.use(bodyParser.json());
+
 // use morgan to log requests to the console
 app.use(morgan('dev'));
 
@@ -46,6 +56,7 @@ const handleRender = (req, res) => {
     } else if (renderProps == null) {
       res.status(404).send('Not found');
     }
+    
     fetchComponentData(req.cookies.token).then((response) => {
       let isAuthorized = false;
       if (response[1].data.success === true) {
@@ -53,6 +64,7 @@ const handleRender = (req, res) => {
       } else {
         isAuthorized = false;        
       }
+
       const initialState = fromJS({
         recipe: {
           recipes: response[0].data,
@@ -69,6 +81,7 @@ const handleRender = (req, res) => {
           isEdit: false,
         }
       });
+
       // Create a new Redux store instance
       const store = configureStore(initialState);
       const initView = renderToString(
@@ -76,6 +89,7 @@ const handleRender = (req, res) => {
           <RouterContext {...renderProps} />
         </Provider>
       );
+
       let state = store.getState();
       let page = renderFullPage(initView, state);
       return res.status(200).send(page);
@@ -112,8 +126,10 @@ app.use(webpackHotMiddleware(compiler));
 
 // apply the routes to our application with the prefix /api
 app.use('/api', apiRoutes);  
+
 /* React Server Render */
 app.use(handleRender);
+
 app.listen(port, (error) => {
   if (error) {
     console.error(error)

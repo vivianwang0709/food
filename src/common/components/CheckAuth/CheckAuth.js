@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+// for using page jump inside the component.
 import { withRouter } from 'react-router';
 
 // High Order Component

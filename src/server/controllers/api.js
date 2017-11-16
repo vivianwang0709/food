@@ -7,7 +7,9 @@ import config from '../config';
 // API Route
 const app = new Express();
 const apiRoutes = Express.Router();
+
 app.set('superSecret', config.secret); // secret variable
+
 // route to authenticate a user (POST http://localhost:8080/api/authenticate)
 apiRoutes.post('/login', function(req, res) {
   // find the user
@@ -76,6 +78,12 @@ apiRoutes.get('/recipes', (req, res) => {
   })
 });
 
+apiRoutes.get('/recipe/:id', (req, res) => {
+  Recipe.find({ id: req.params.id }, (err, recipe) => {
+    res.status(200).json(recipe);
+  })
+});
+
 // route middleware to verify a token
 apiRoutes.use((req, res, next) => {
   // check header or url parameters or post parameters for token
@@ -103,6 +111,7 @@ apiRoutes.use((req, res, next) => {
     });
   }
 });
+
 // route to show a random message (GET http://localhost:8080/api/)
 apiRoutes.get('/authenticate', (req, res) => {
   res.json({
@@ -110,6 +119,7 @@ apiRoutes.get('/authenticate', (req, res) => {
     message: 'Enjoy your token!',
   });
 });
+
 // create recipe
 apiRoutes.post('/recipes', (req, res) => {
   const newRecipe = new Recipe({
@@ -126,6 +136,7 @@ apiRoutes.post('/recipes', (req, res) => {
     res.json({ success: true });      
   });
 }); 
+
 // update recipe
 apiRoutes.put('/recipes/:id', (req, res) => {
   Recipe.update({ _id: req.params.id }, {
@@ -141,6 +152,7 @@ apiRoutes.put('/recipes/:id', (req, res) => {
     res.json({ success: true });      
   });
 });
+
 // remove recipe
 apiRoutes.delete('/recipes/:id', (req, res) => {
   Recipe.remove({ _id: req.params.id }, (err, recipe) => {

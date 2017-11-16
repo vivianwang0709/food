@@ -3,12 +3,11 @@ import { Form, FormGroup, Button, FormControl, ControlLabel } from 'react-bootst
 
 const ShareBox = (props) => {
   return (<div>
-    <h3>{props.recipeId}</h3>
     <Form horizontal>
       <FormGroup
         controlId="formBasicText"
       >
-        <ControlLabel>請輸入食譜名稱</ControlLabel>
+        <ControlLabel>Enter the Name of Resaturant</ControlLabel>
         <FormControl
           type="text"
           placeholder="Enter text"
@@ -20,7 +19,7 @@ const ShareBox = (props) => {
       <FormGroup
         controlId="formBasicText"
       >
-        <ControlLabel>請輸入食譜說明</ControlLabel>
+        <ControlLabel>Enter the Description</ControlLabel>
         <FormControl 
           componentClass="textarea" 
           placeholder="textarea" 
@@ -32,7 +31,7 @@ const ShareBox = (props) => {
       <FormGroup
         controlId="formBasicText"
       >
-        <ControlLabel>請輸入食譜圖片網址</ControlLabel>
+        <ControlLabel>Enter Food Image</ControlLabel>
         <FormControl
           type="text"
           placeholder="Enter text"
@@ -44,7 +43,7 @@ const ShareBox = (props) => {
       <FormGroup
         controlId="formBasicText"
       >
-        <ControlLabel>請輸入地址</ControlLabel>
+        <ControlLabel>Enter the Loacion</ControlLabel>
         <FormControl
           type="text"
           placeholder="Enter text"
@@ -59,7 +58,7 @@ const ShareBox = (props) => {
         bsSize="large" 
         block
       >
-        提交送出
+        Submit
       </Button>
     </Form>
   </div>);

@@ -13,8 +13,8 @@ const RecipeBox = (props) => {
           {
             props.isAuthorized === true ? (
             <p>
-              <Button bsStyle="primary" onClick={props.onDeleteRecipe(props.recipe.get('_id'))}>刪除</Button>&nbsp;
-              <Button bsStyle="default" onClick={props.onUpadateRecipe(props.recipe.get('_id'))}>修改</Button>
+              <Button bsStyle="primary" onClick={props.onDeleteRecipe(props.recipe.get('_id'))}>Delete</Button>&nbsp;
+              <Button bsStyle="default" onClick={props.onUpadateRecipe(props.recipe.get('_id'))}>Modify</Button>
             </p>)
             : null            
           }

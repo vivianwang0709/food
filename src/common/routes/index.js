@@ -6,6 +6,8 @@ import HomePageContainer from '../containers/HomePageContainer';
 import LoginPageContainer from '../containers/LoginPageContainer';
 import SharePageContainer from '../containers/SharePageContainer';
 import PostContainer from '../containers/PostContainer';
+import ShareTextContainer from '../containers/ShareTextContainer';
+
 
 export default (
   <Route path='/' component={Main}>
@@ -13,5 +15,6 @@ export default (
     <Route path="/login" component={CheckAuth(LoginPageContainer, 'guest')}/>
     <Route path="/share" component={CheckAuth(SharePageContainer, 'auth')}/>
     <Route path="/post/:name" component={PostContainer}/>  
+    <Route path="/editor" component={ShareTextContainer}/>  
   </Route>
 );

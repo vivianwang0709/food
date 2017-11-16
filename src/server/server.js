@@ -73,7 +73,8 @@ const handleRender = (req, res) => {
             name: '', 
             description: '', 
             imagePath: '', 
-            location: '',           
+            location: '',
+            content:'',         
           }  
         },
         user: {
@@ -108,13 +109,13 @@ const renderFullPage = (html, preloadedState) => (`
         <!-- Optional theme -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.7/journal/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/main.css">
       <body>
         <div id="app">${html}</div>
         <script>
           window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\x3c')}
         </script>
         <script src="/static/bundle.js"></script>
-        <link href="/static/main.css" rel="stylesheet">        
       </body>
     </html>`
 );

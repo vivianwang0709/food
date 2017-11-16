@@ -9,6 +9,15 @@ import {
   completeLogout,
 } from '../actions';
 
+
+var loadScript = function(src) {
+  var tag = document.createElement('script');
+  tag.async = false;
+  tag.src = src;
+  document.body.appendChild(tag);
+};
+
+
 function getCookie(keyName) {
   var name = keyName + '=';
   const cookies = document.cookie.split(';');
@@ -25,6 +34,19 @@ function getCookie(keyName) {
 }
 
 export default {
+  setContent:(dispath,value) =>{
+    //window.editor.codemirror.setValue();
+    value = editor.codemirror.getValue();
+    mvalue = Editor.markdown(value);
+    
+  },
+  addScript:(dispatch) => {
+    loadScript('/static/js/editor.js');
+    loadScript('/static/js/marked.js');
+    loadScript('/static/js/zepto.min.js');
+    console.log(window.editor);
+    //browserHistory.push('/'); 
+  },
   login: (dispatch, email, password) => {
     axios.post('/api/login', {
       email: email,
@@ -38,6 +60,8 @@ export default {
         window.location.reload();        
       } else {
         if (!document.cookie.token) {
+          // Cookies are data, stored in small text files, on your computer.
+          // document.cookie is the way to creat a cookie by javascipt.
           let d = new Date();
           d.setTime(d.getTime() + (24 * 60 * 60 * 1000));
           const expires = 'expires=' + d.toUTCString();
@@ -95,8 +119,8 @@ export default {
         browserHistory.push('/share');         
       } else {
         dispatch(hideSpinner());  
-        window.location.reload();        
-        browserHistory.push('/'); 
+        window.location.reload();      
+        browserHistory.push('/editor?recipeId='+id); 
       }
     })
     .catch(function (error) {
@@ -134,7 +158,8 @@ export default {
         alert('發生錯誤，請再試一次！');
         browserHistory.push('/');         
       } else {
-        dispatch(hideSpinner());  
+        dispatch(hideSpinner()); 
+        // 頁面重載 
         window.location.reload();        
         browserHistory.push('/'); 
       }

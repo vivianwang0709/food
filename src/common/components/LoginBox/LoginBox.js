@@ -13,7 +13,7 @@ const LoginBox = ({
       <FormGroup
         controlId="formBasicText"
       >
-        <ControlLabel>請輸入您的 Email</ControlLabel>
+        <ControlLabel>Enter Email</ControlLabel>
         <FormControl
           type="text"
           onChange={onChangeEmailInput}
@@ -24,7 +24,7 @@ const LoginBox = ({
       <FormGroup
         controlId="formBasicText"
       >
-        <ControlLabel>請輸入您的密碼</ControlLabel>
+        <ControlLabel>Enter Password</ControlLabel>
         <FormControl
           type="password"
           onChange={onChangePasswordInput}
@@ -38,7 +38,7 @@ const LoginBox = ({
         bsSize="large" 
         block
       >
-        提交送出
+        Submit
       </Button>
     </Form>
   </div>

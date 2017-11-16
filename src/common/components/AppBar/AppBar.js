@@ -11,7 +11,7 @@ const AppBar = ({
   <Navbar>
     <Navbar.Header>
       <Navbar.Brand>
-        <Link to="/">OpenCook</Link>
+        <Link to="/">Food Share</Link>
       </Navbar.Brand>
       <Navbar.Toggle />
     </Navbar.Header>
@@ -21,14 +21,14 @@ const AppBar = ({
         (
           <Nav pullRight>
             <LinkContainer to={{ pathname: '/login' }}>
-            <NavItem eventKey={2} href="#">登入</NavItem>
+            <NavItem eventKey={2} href="#">Login In</NavItem>
             </LinkContainer>
           </Nav>
         ) :
         (
           <Nav pullRight>
-            <NavItem eventKey={1} onClick={onToShare} href="/share">分享食譜</NavItem>
-            <NavItem eventKey={2} onClick={onLogout} href="#">登出</NavItem>
+            <NavItem eventKey={1} onClick={onToShare} href="/share">Share food</NavItem>
+            <NavItem eventKey={2} onClick={onLogout} href="#">Login Out</NavItem>
           </Nav>
         )        
       }

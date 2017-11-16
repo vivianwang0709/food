@@ -9,6 +9,8 @@ import { checkAuth } from '../common/actions';
 
 import '../common/style/post.less';
 import '../common/style/home.less';
+import '../common/style/editor.css';
+
 
 // get initial state from server side
 const initialState = window.__PRELOADED_STATE__;

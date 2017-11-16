@@ -13,4 +13,5 @@ export default mongoose.model('Recipe', new Schema({
     steps: Array,
     updatedAt: Date,
     location: String,
+    content: String,
 }));

@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ShareBox from '../../components/ShareBox';
+import { browserHistory } from 'react-router';
+
 
 import { 
   addRecipe,

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <script type="text/javascript" src="http://lab.lepture.com/editor/marked.js"></script>
+  <script type="text/javascript" src="http://lab.lepture.com/editor/editor.js"></script>
+  <link rel="stylesheet" href="http://lab.lepture.com/editor/editor.css" />
+  <title>Editor</title>
+  <style type="text/css">
+    body {
+      padding: 0;
+      margin: 0;
+      background-color: #f9f9f7;
+    }
+
+    .editor-wrapper {
+      max-width: 680px;
+      padding: 10px;
+      margin: 60px auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="editor-wrapper">
+    <input class="title" type="text" placeholder="Title" />
+    <textarea id="editor" placeholder="Content here ....">
+    </textarea>
+  </div>
+
+   <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/zepto/1.0/zepto.min.js"></script>
+ <script type="text/javascript">
+    var editor = new Editor();
+    editor.render();
+    editor.innerText = "##mmm  dfdfd"
+    console.log(editor.innerText);
+    console.log(Editor.markdown(editor.innerText));
+  </script> 
+</body>
+
+</html>

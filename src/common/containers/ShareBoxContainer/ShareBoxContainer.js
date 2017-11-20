@@ -39,10 +39,10 @@ export default connect(
         dispatch(updateRecipe(dispatch, recipeId, name, description, imagePath, location));
         dispatch(showSpinner());
       } else {
-        dispatch(addRecipe(dispatch, name, description, imagePath, location));
+        dispatch(addRecipe(dispatch, name, description, imagePath, location,  recipes));
         dispatch(showSpinner());
       }
-    },    
+    },
   }),
   (stateProps, dispatchProps, ownProps) => {
     const { recipes, recipeId, name, description, imagePath, location, isEdit } = stateProps;

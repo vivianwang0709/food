@@ -17,8 +17,7 @@ export default connect(
       dispatch(addScript())
     ),
     onEditorSubmit: (event) => (
-      dispatch(setRecipe({ keyPath: ['recipe','content'], value: editor.codemirror.getValue() })),     
-      dispatch(setContent())
+      dispatch(setRecipe({ keyPath: ['recipe','content'], value: editor.codemirror.getValue() }))
     ),
   })
 )(ShareText);

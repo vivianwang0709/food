@@ -79,7 +79,7 @@ apiRoutes.get('/recipes', (req, res) => {
 });
 
 apiRoutes.get('/recipe/:id', (req, res) => {
-  Recipe.find({ id: req.params.id }, (err, recipe) => {
+  Recipe.find({ _id: req.params.id }, (err, recipe) => {
     res.status(200).json(recipe);
   })
 });
@@ -126,7 +126,6 @@ apiRoutes.post('/recipes', (req, res) => {
     name: req.body.name, 
     description: req.body.description, 
     imagePath: req.body.imagePath,
-    steps: ['放入番茄', '打個蛋', '放入少許鹽巴', '用心快炒'],
     updatedAt: new Date()
   });
 
@@ -143,7 +142,6 @@ apiRoutes.put('/recipes/:id', (req, res) => {
     name: req.body.name, 
     description: req.body.description, 
     imagePath: req.body.imagePath,
-    steps: ['放入番茄', '打個蛋', '放入少許鹽巴', '用心快炒'],
     updatedAt: new Date(),
     location: req.body.location,
   } ,(err) => {

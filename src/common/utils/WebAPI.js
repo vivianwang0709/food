@@ -2,11 +2,13 @@ import axios from 'axios';
 import { browserHistory } from 'react-router';
 import uuid from 'uuid';
 
+
 import { 
   authComplete,
   authError,
   hideSpinner,
   completeLogout,
+  setRecipe,
 } from '../actions';
 
 
@@ -103,7 +105,7 @@ export default {
     .catch((error) => {
     });
   },
-  addRecipe: (dispatch, name, description, imagePath, location) => {
+  addRecipe: (dispatch, name, description, imagePath, location, recipes) => {
     const id = uuid.v4();
     axios.post('/api/recipes?token=' + getCookie('token'), {
       id: id,
@@ -118,12 +120,21 @@ export default {
         alert('發生錯誤，請再試一次！');
         browserHistory.push('/share');         
       } else {
-        dispatch(hideSpinner());  
-        window.location.reload();      
-        browserHistory.push('/editor?recipeId='+id); 
+        dispatch(hideSpinner());
       }
     })
     .catch(function (error) {
+    });
+
+    axios.get('/api/recipes', {
+    })
+    .then((recipes) => {
+      // add _id to store:recipe
+      const index = recipes['data'].length - 1;
+      const recipe = recipes['data'][index];
+      dispatch(setRecipe({ keyPath: ['recipe', 'id'], value: recipe._id }));        
+      //window.location.reload();
+      browserHistory.push('/editor?recipeId=' + recipe._id);
     });
   },
   updateRecipe: (dispatch, recipeId, name, description, imagePath, location) => {

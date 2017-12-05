@@ -9,6 +9,8 @@ import {
   hideSpinner,
   completeLogout,
   setRecipe,
+  updateContent,
+  getContent,
 } from '../actions';
 
 
@@ -36,17 +38,53 @@ function getCookie(keyName) {
 }
 
 export default {
-  setContent:(dispath,value) =>{
-    //window.editor.codemirror.setValue();
-    value = editor.codemirror.getValue();
-    mvalue = Editor.markdown(value);
-    
+  getContent: (dispatch, recipeId) => {
+    axios.get('api/recipe/' + recipeId)
+    .then((response) => {
+      console.log(response.data[0].content);
+      editor.codemirror.setValue('#fdfdooooo');
+      if(response.data[0].content !== ''){
+        editor.codemirror.setValue(response.data[0].content);
+      }
+      console.log(editor);
+      editor.codemirror.setValue('#fdfd');
+    })
+    .catch(function (error) {
+    });
   },
-  addScript:(dispatch) => {
+  updateContent: (dispatch, recipeId, content, mcontent) => {
+    axios.put('/api/recipe/content/' + recipeId + '?token=' + getCookie('token'), {
+      id: recipeId,
+      content: content,
+      mcontent: mcontent,
+    })
+    .then((response) => {
+      if(response.data.success === false) {
+        dispatch(hideSpinner());  
+        dispatch(setRecipe({ key: 'recipeId', value: '' }));
+        dispatch(setUi({ key: 'isEdit', value: false }));
+        alert('發生錯誤，請再試一次！');
+        browserHistory.push('/editor?recipeId=' + recipeId);         
+      } else {
+        dispatch(hideSpinner());  
+        window.location.reload();        
+        browserHistory.push('/'); 
+      }
+    })
+    .catch(function (error) {
+    });
+  },
+  setContent: (dispatch, recipeId) => {
+    const mcontent = editor.codemirror.getValue();
+    const content = Editor.markdown(mcontent);
+    dispatch(setRecipe({ keyPath: ['recipe', 'content'], value: content }));
+    dispatch(setRecipe({ keyPath: ['recipe', 'mcontent'], value: mcontent }));
+    dispatch(updateContent(dispatch, recipeId, mcontent,content))
+  },
+  addScript: () => {
     loadScript('/static/js/editor.js');
     loadScript('/static/js/marked.js');
     loadScript('/static/js/zepto.min.js');
-    console.log(window.editor);
     //browserHistory.push('/'); 
   },
   login: (dispatch, email, password) => {
@@ -105,14 +143,16 @@ export default {
     .catch((error) => {
     });
   },
-  addRecipe: (dispatch, name, description, imagePath, location, recipes) => {
+  addRecipe: (dispatch, name, description, imagePath, locations) => {
     const id = uuid.v4();
     axios.post('/api/recipes?token=' + getCookie('token'), {
       id: id,
       name: name,
       description: description,
       imagePath: imagePath,
-      location: location,
+      locations: locations,
+      content:'null',
+      mcontent:'null',
     })
     .then((response) => {
       if(response.data.success === false) {
@@ -120,13 +160,15 @@ export default {
         alert('發生錯誤，請再試一次！');
         browserHistory.push('/share');         
       } else {
+        window.location.reload();
         dispatch(hideSpinner());
+        browserHistory.push('/editor?recipeId=' + response.data[0]._id);
       }
     })
     .catch(function (error) {
     });
 
-    axios.get('/api/recipes', {
+/*     axios.get('/api/recipes', {
     })
     .then((recipes) => {
       // add _id to store:recipe
@@ -135,7 +177,7 @@ export default {
       dispatch(setRecipe({ keyPath: ['recipe', 'id'], value: recipe._id }));        
       //window.location.reload();
       browserHistory.push('/editor?recipeId=' + recipe._id);
-    });
+    }); */
   },
   updateRecipe: (dispatch, recipeId, name, description, imagePath, location) => {
     axios.put('/api/recipes/' + recipeId + '?token=' + getCookie('token'), {
@@ -143,7 +185,7 @@ export default {
       name: name,
       description: description,
       imagePath: imagePath,
-      location: location,
+      locations: locations,
     })
     .then((response) => {
       if(response.data.success === false) {

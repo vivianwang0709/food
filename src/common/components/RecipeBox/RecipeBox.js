@@ -5,7 +5,7 @@ import { Grid, Row, Col, Image, Thumbnail, Button } from 'react-bootstrap';
 const RecipeBox = (props) => {
   return(
       <Col xs={6} md={4}>
-      <Link to={`/post/${props.recipe.get('_id')}`} onClick={props.onPost(props.recipe.get('_id'))} >link</Link>
+      <Button onClick={props.onPost(props.recipe.get('_id'))} >link</Button>
         <Thumbnail src={props.recipe.get('imagePath')} alt="242x200">
           <h3>{props.recipe.get('name')}</h3>
           <h3>{props.recipe.get('location')}</h3>

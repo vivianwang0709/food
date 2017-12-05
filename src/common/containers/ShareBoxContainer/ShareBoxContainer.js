@@ -18,7 +18,9 @@ export default connect(
     name: state.getIn(['recipe', 'recipe', 'name']),
     description: state.getIn(['recipe', 'recipe', 'description']),
     imagePath: state.getIn(['recipe', 'recipe', 'imagePath']),
-    location: state.getIn(['recipe', 'recipe', 'location']),    
+    locations: state.getIn(['recipe', 'recipe', 'locations']),
+    content: state.getIn(['recipe', 'recipe', 'content']),
+    mcontent: state.getIn(['recipe', 'recipe', 'mcontent']),  
     isEdit: state.getIn(['ui', 'isEdit']),
   }),
   (dispatch) => ({
@@ -32,23 +34,23 @@ export default connect(
       dispatch(setRecipe({ keyPath: ['recipe', 'imagePath'], value: event.target.value }))
     ),
     onChangeLocation: (event) => (
-      dispatch(setRecipe({ keyPath: ['recipe', 'location'], value: event.target.value }))
+      dispatch(setRecipe({ keyPath: ['recipe', 'locations'], value: event.target.value }))
     ),        
-    onRecipeSubmit: (recipes, recipeId, name, description, imagePath, location, isEdit) => () => {
+    onRecipeSubmit: (recipes, recipeId, name, description, imagePath, locations, content, mcontent, isEdit) => () => {
       if (isEdit === true) {
-        dispatch(updateRecipe(dispatch, recipeId, name, description, imagePath, location));
+        dispatch(updateRecipe(dispatch, recipeId, name, description, imagePath, locations));
         dispatch(showSpinner());
       } else {
-        dispatch(addRecipe(dispatch, name, description, imagePath, location,  recipes));
+        dispatch(addRecipe(dispatch, name, description, imagePath, locations));
         dispatch(showSpinner());
       }
     },
   }),
   (stateProps, dispatchProps, ownProps) => {
-    const { recipes, recipeId, name, description, imagePath, location, isEdit } = stateProps;
+    const { recipes, recipeId, name, description, imagePath, locations, isEdit } = stateProps;
     const { onRecipeSubmit } = dispatchProps;
     return Object.assign({}, stateProps, dispatchProps, ownProps, {
-      onRecipeSubmit: onRecipeSubmit(recipes, recipeId, name, description, imagePath, location, isEdit),
+      onRecipeSubmit: onRecipeSubmit(recipes, recipeId, name, description, imagePath, locations, isEdit),
     });
   }  
 )(ShareBox);

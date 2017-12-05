@@ -4,20 +4,23 @@ import ShareText from '../../components/ShareText';
 
 import { 
   addScript,
-  setRecipe,
-  setContent 
+  setContent,
+  getContent,
 } from '../../actions';
 
 
 export default connect(
   (state) => ({
+    recipes: state.getIn(['recipe', 'recipes']),
+    recipe: state.getIn(['recipe', 'recipe']),
   }),
   (dispatch) => ({
-    onLoad: (e) => (
-      dispatch(addScript())
-    ),
-    onEditorSubmit: (event) => (
-      dispatch(setRecipe({ keyPath: ['recipe','content'], value: editor.codemirror.getValue() }))
-    ),
+    onLoad: (recipeId) => {
+      dispatch(addScript());
+      dispatch(getContent(dispatch, recipeId));
+    },      
+    onEditorSubmit: (recipeId) => () => {
+      dispatch(setContent(dispatch, recipeId));
+    },
   })
 )(ShareText);

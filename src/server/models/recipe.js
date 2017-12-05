@@ -12,6 +12,7 @@ export default mongoose.model('Recipe', new Schema({
     imagePath: String,
     steps: Array,
     updatedAt: Date,
-    location: String,
+    locations: String,
     content: String,
+    mcontent: String,
 }));

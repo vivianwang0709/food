@@ -14,3 +14,5 @@ export const UPDATE_RECIPE = 'UPDATE_RECIPE';
 export const DELETE_RECIPE = 'DELETE_RECIPE';
 export const ADD_SCRIPT = 'ADD_SCRIPT';
 export const SET_CONTENT = 'SET_CONTENT';
+export const UPDATE_CONTENT = 'UPDATE_CONTENT';
+export const GET_CONTENT = 'GET_CONTENT';

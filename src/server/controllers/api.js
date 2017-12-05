@@ -57,7 +57,6 @@ apiRoutes.get('/setup', (req, res) => {
     name: '番茄炒蛋', 
     description: '番茄炒蛋，一道非常經典的家常菜料理。雖然看似普通，但每個家庭都有屬於自己家裡的不同味道', 
     imagePath: 'https://c1.staticflickr.com/6/5011/5510599760_6668df5a8a_z.jpg',
-    steps: ['放入番茄', '打個蛋', '放入少許鹽巴', '用心快炒'],
     updatedAt: new Date()
   });
 
@@ -126,15 +125,34 @@ apiRoutes.post('/recipes', (req, res) => {
     name: req.body.name, 
     description: req.body.description, 
     imagePath: req.body.imagePath,
-    updatedAt: new Date()
+    updatedAt: new Date(),
+    location: req.body.location,
+    content: 'null',
+    mcontent: 'null',
   });
 
   newRecipe.save((err) => {
     if (err) throw err;
     console.log('User saved successfully');
-    res.json({ success: true });      
+    Recipe.find({ name: req.body.name }, (err, recipe) => {
+      res.status(200).json(recipe);     
+    });
   });
 }); 
+
+// update content
+apiRoutes.put('/recipe/content/:id', (req, res) => { 
+  Recipe.update({ _id: req.params.id }, {
+    updatedAt: new Date(),
+    content: req.body.content,
+    mcontent: req.body.mcontent,
+  } ,(err) => {
+    if (err) throw err;
+    console.log('User updated successfully');
+    res.json({ success: true });
+  });    
+});
+
 
 // update recipe
 apiRoutes.put('/recipes/:id', (req, res) => {

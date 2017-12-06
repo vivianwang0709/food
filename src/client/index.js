@@ -9,7 +9,7 @@ import { checkAuth } from '../common/actions';
 
 import '../common/style/post.less';
 import '../common/style/home.less';
-import '../common/style/editor.css';
+import '../common/style/editors.css';
 
 
 // get initial state from server side

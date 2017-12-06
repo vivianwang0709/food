@@ -10,7 +10,6 @@ import {
   completeLogout,
   setRecipe,
   updateContent,
-  getContent,
 } from '../actions';
 
 
@@ -41,7 +40,6 @@ export default {
   getContent: (dispatch, recipeId) => {
     axios.get('api/recipe/' + recipeId)
     .then((response) => {
-      editor.codemirror.setValue('#fdfdf');
       if(response.data[0].content !== null){
         editor.codemirror.setValue(response.data[0].content);
       }
@@ -64,8 +62,8 @@ export default {
         browserHistory.push('/editor?recipeId=' + recipeId);         
       } else {
         dispatch(hideSpinner());  
-        //window.location.reload();        
-        //browserHistory.push('/'); 
+        window.location.reload();        
+        browserHistory.push('/'); 
       }
     })
     .catch(function (error) {
@@ -74,10 +72,9 @@ export default {
   setContent: (dispatch, recipeId) => {
     const mcontent = editor.codemirror.getValue();
     const content = Editor.markdown(mcontent);
-    editor.codemirror.setValue('#hope it will success');
     dispatch(setRecipe({ keyPath: ['recipe', 'content'], value: content }));
     dispatch(setRecipe({ keyPath: ['recipe', 'mcontent'], value: mcontent }));
-    dispatch(updateContent(dispatch, recipeId, mcontent,content))
+    dispatch(updateContent(dispatch, recipeId, mcontent, content))
   },
   addScript: () => {
     loadScript('/static/js/editor.js');

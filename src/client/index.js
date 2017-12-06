@@ -13,6 +13,7 @@ import '../common/style/editors.css';
 
 
 // get initial state from server side
+// the variable is from the script setting  of server-side index html
 const initialState = window.__PRELOADED_STATE__;
 
 // use initial state to create store and pass to provider

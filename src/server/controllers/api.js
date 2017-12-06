@@ -126,7 +126,7 @@ apiRoutes.post('/recipes', (req, res) => {
     description: req.body.description, 
     imagePath: req.body.imagePath,
     updatedAt: new Date(),
-    location: req.body.location,
+    locations: req.body.locations,
     content: 'null',
     mcontent: 'null',
   });
@@ -161,7 +161,7 @@ apiRoutes.put('/recipes/:id', (req, res) => {
     description: req.body.description, 
     imagePath: req.body.imagePath,
     updatedAt: new Date(),
-    location: req.body.location,
+    locations: req.body.locations,
   } ,(err) => {
     if (err) throw err;
     console.log('User updated successfully');

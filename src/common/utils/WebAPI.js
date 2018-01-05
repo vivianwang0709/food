@@ -10,6 +10,7 @@ import {
   completeLogout,
   setRecipe,
   updateContent,
+  getContent,
 } from '../actions';
 
 
@@ -161,6 +162,7 @@ export default {
       }
     })
     .catch(function (error) {
+      console.log('addrecipe error');
     });
 
 /*     axios.get('/api/recipes', {
@@ -174,7 +176,7 @@ export default {
       browserHistory.push('/editor?recipeId=' + recipe._id);
     }); */
   },
-  updateRecipe: (dispatch, recipeId, name, description, imagePath, location) => {
+  updateRecipe: (dispatch, recipeId, name, description, imagePath, locations) => {
     axios.put('/api/recipes/' + recipeId + '?token=' + getCookie('token'), {
       id: recipeId,
       name: name,
@@ -188,11 +190,12 @@ export default {
         dispatch(setRecipe({ key: 'recipeId', value: '' }));
         dispatch(setUi({ key: 'isEdit', value: false }));
         alert('發生錯誤，請再試一次！');
-        browserHistory.push('/share');         
+        browserHistory.push('/share');       
       } else {
-        dispatch(hideSpinner());  
-        window.location.reload();        
-        browserHistory.push('/'); 
+        dispatch(hideSpinner());
+        //window.location.reload();
+        dispatch(getContent(dispatch, recipeId));
+        browserHistory.push('/editor?recipeId=' + recipeId);
       }
     })
     .catch(function (error) {

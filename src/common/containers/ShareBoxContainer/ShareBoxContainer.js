@@ -37,7 +37,7 @@ export default connect(
       dispatch(setRecipe({ keyPath: ['recipe', 'locations'], value: event.target.value }))
     ),        
     onRecipeSubmit: (recipes, recipeId, name, description, imagePath, locations, content, mcontent, isEdit) => () => {
-      if (isEdit === true) {
+      if (recipeId != "") {
         dispatch(updateRecipe(dispatch, recipeId, name, description, imagePath, locations));
         dispatch(showSpinner());
       } else {

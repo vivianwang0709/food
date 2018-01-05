@@ -47,7 +47,7 @@ const ShareBox = (props) => {
         <FormControl
           type="text"
           placeholder="Enter text"
-          defaultValue={props.location}
+          defaultValue={props.locations}
           onChange={props.onChangeLocation}
         />
         <FormControl.Feedback />

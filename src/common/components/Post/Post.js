@@ -15,7 +15,7 @@ const Post = (props) => {
             <h3>{props.name}</h3>
             <img src={props.imagePath} alt="242x200"></img>
             <h3>{props.description}</h3>
-            <iframe width="400" height="300" src={'http://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=' + props.location + '&z=16&output=embed&t='}></iframe>
+            <iframe width="400" height="300" src={'http://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=' + props.locations + '&z=16&output=embed&t='}></iframe>
         </div>
     );
 }

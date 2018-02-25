@@ -4,7 +4,7 @@ import { Grid, Row, Col, Image, Thumbnail, Button } from 'react-bootstrap';
 
 const RecipeBox = (props) => {
   return(
-      <Col xs={6} md={4}>
+      <Col  className='post' xs={6} md={4}>
       {
         props.isAuthorized === true ? (
           <Thumbnail src={props.recipe.get('imagePath')} alt="242x200">

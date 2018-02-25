@@ -12,6 +12,7 @@ export default connect(
       description: state.getIn(['recipe', 'recipe', 'description']),
       imagePath: state.getIn(['recipe', 'recipe', 'imagePath']),
       locations: state.getIn(['recipe', 'recipe', 'locations']),
+      mcontent: state.getIn(['recipe', 'recipe', 'mcontent']),
     }),
     (dispatch) => ({
       onUpadateContent: (recipes, recipeId) => () => {

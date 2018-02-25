@@ -1,7 +1,9 @@
-var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin'); //css单独打包
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin'); //css单独打包
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');//壓縮js
 
-var plugins = [];
+
+const plugins = [];
 
 
 require.extensions['.css'] = () => {
@@ -9,10 +11,12 @@ require.extensions['.css'] = () => {
 };
 
 
-plugins.push(new webpack.optimize.OccurrenceOrderPlugin());
-plugins.push(new webpack.HotModuleReplacementPlugin());
-plugins.push(new ExtractTextPlugin('[name].css')); //css单独打包
+//plugins.push(new webpack.optimize.OccurrenceOrderPlugin());
+//plugins.push(new webpack.HotModuleReplacementPlugin());
 
+//css单独打包
+plugins.push(new ExtractTextPlugin('[name].css'));
+plugins.push(new UglifyJSPlugin());
 
 
 module.exports = {
@@ -44,7 +48,7 @@ module.exports = {
     }, {
       test: /\.less/,
       exclude: /^node_modules$/,
-      loader: ExtractTextPlugin.extract('style-loader', 'css-loader!autoprefixer-loader!less-loader')      
+      loader: ExtractTextPlugin.extract('style-loader', 'css-loader!autoprefixer-loader!less-loader')   
     }],
   },
   plugins,  

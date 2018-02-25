@@ -1,5 +1,15 @@
-# plugin record
-* editor:https://github.com/lepture/editor
+### 開發記錄
+* template
+    * 移動前端解決方案：響應式方案
+    * 頁面配置
+        * 最小iphone4:320px*480px
+        * 移動端切換尺寸:768px
+    * plugin
+        * jQuery瀑布流插件 Masonry: http://www.jq22.com/jquery-info362        
+        * markdown editor:https://github.com/lepture/editor
+
+
+
 
 
 # 用 React + Redux + Node（Isomorphic）開發食譜分享網站

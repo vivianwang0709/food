@@ -1,4 +1,66 @@
-.thumbnail > img{
-    width: 350px;
-    height: 200px;    
+a:focus{
+    background-color: none !important;
+}
+
+@ipad-size:768px;
+
+
+
+@media (min-width: @ipad-size){
+    .navbar>.container{
+        flex-wrap: nowrap;    
+    }
+    .navbar-right {
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+
+.home_post{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto;
+
+    .post{
+        margin-bottom: 20px;
+    }
+    .post > a >.thumbnail > img{
+        width: 300px;
+        height: 200px;    
+    }
+    
+    .post >.thumbnail > img{
+        width: 300px;
+        height: 200px;    
+    }
+
+}
+
+
+
+@media (max-width:960px) and (min-width: @ipad-size){
+
+    .home_post>.post{
+        min-width: 50%;
+        
+        .thumbnail{
+            width: 350px;
+            margin: 0 auto;
+        }
+    }
+
+}
+
+
+@media (max-width: @ipad-size){
+    .home_post>.post{
+        width: 100%;
+    }
+    .thumbnail{
+        width: 100%;
+        max-width: 450px;
+        margin: 0 auto;
+    }
 }
